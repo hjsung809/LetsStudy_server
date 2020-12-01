@@ -1,0 +1,129 @@
+* { margin: 0; padding: 0;}
+body { font-family: sans-serif; }
+li { list-style: none; }
+a { text-decoration: none; }
+img { border: 0; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+#main_header {
+  width: 960px;
+  margin: 0 auto;
+  
+  height: 160px;
+  position: relative;
+  background-color: antiquewhite;
+}
+
+#main_header > #title {
+  position: absolute;
+  left: 20px; top: 30px;
+}
+
+#main_header > #main_gnb {
+  position: absolute;
+  right: 0px; top: 0px;
+}
+
+#main_header > #main_lnb {
+  position: absolute;
+  right: 0px; bottom: 0px;
+}
+
+#main_user {
+  position: absolute;
+  top: 40px;
+  right: 30px;
+}
+
+#main_user > a {
+  margin: 0 auto;
+  height: 50px;
+  padding: 3px;
+  display: block; 
+  padding: 5px 10px;
+  border: 1px solid black;
+}
+
+#main_user > a:hover{ 
+  background-color: rgb(204, 203, 203);
+  color: white;
+}
+
+#main_user > a > img {
+  width: 50px;
+  height: 50px;
+  border: 0;
+  line-height: 50px;
+}
+
+#main_user > a > div {
+  width: 100px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  float: right;
+  overflow: hidden;
+}
+
+
+#main_gnb > ul { overflow: hidden;}
+#main_gnb > ul > li { float:  left; }
+#main_gnb > ul > li > a{ 
+  display: block; 
+  padding: 2px 10px;
+  border: 1px solid black;
+}
+
+#main_gnb > ul > li > a:hover{ 
+  background-color: black;
+  color: white;
+}
+
+#main_lnb > ul { overflow: hidden;}
+#main_lnb > ul > li { float:  left; }
+#main_lnb > ul > li > a{
+  display: block; 
+  padding: 10px 20px;
+  border: 1px solid black;
+}
+
+#main_lnb > ul > li > a:hover{ 
+  background-color: black;
+  color: white;
+}
+
+#content {
+  width: 960px; margin: 0 auto;
+  margin-top: 10px;
+  height: calc(100% - 220px);
+  overflow: hidden;
+
+}
+
+#content > #main_section {
+  width: 960px;
+  float: left;
+  height: 100%;
+  background-color: antiquewhite;
+}
+
+#content > #main_aside {
+  width: 200px;
+  float: right;
+  height: 100%;
+  background-color: antiquewhite;
+}
+
+#main_footer {
+  width: 960px;
+  height: 50px;
+  line-height: 50px;
+  margin: 0px auto;
+
+  text-align: center;
+}
