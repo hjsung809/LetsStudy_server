@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% 
-  study.User user = (study.User)session.getAttribute("user");
-  if (user == null) {
-    out.println("<script>alert('로그인 정보가 유효하지 않습니다.')</script>");
-    response.sendRedirect("signin.jsp");
-  }
 %>
 
 <!DOCTYPE html>

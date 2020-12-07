@@ -6,7 +6,7 @@
     </div>
     <nav id="main_gnb">
       <ul>
-        <li><a href="main.jsp">메인 화면</a></li>
+        <li><a href="study_main.jsp">메인 화면</a></li>
         <li><a href="study_search.jsp">검색 화면</a></li>
       </ul>
     </nav>

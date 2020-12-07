@@ -3,12 +3,13 @@
 <jsp:useBean scope="application" id="passport" class="study.Passport" />
 
 <%
+
   if(request.getMethod().equals("POST")) {
       study.User user = passport.signIn(request.getParameter("email"), request.getParameter("password"));
 
       if (user != null) {
         session.setAttribute("user", user);
-        response.sendRedirect("main.jsp");
+        response.sendRedirect("study_main.jsp");
       } else {
         out.println("<script>alert('로그인에 실패하였습니다.')</script>");
       }
