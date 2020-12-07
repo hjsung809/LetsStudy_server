@@ -4,10 +4,6 @@
 
 <% 
   study.User user = (study.User)session.getAttribute("user");
-  if (user == null) {
-    out.println("<script>alert('로그인 정보가 유효하지 않습니다.')</script>");
-    response.sendRedirect("signin.jsp");
-  }
 
   ArrayList<study.StudyGroup> studyGroupList = studyGroupManager.getStudyGroupList(user.getUser_id());
   session.setAttribute("studyGroupList", studyGroupList);
@@ -45,24 +41,6 @@
     #my_study_list td {
       border: 1px solid black;
     }
-
-    #study_join_form input{
-      width: 80%;
-      display: block;
-      margin: 5px auto;
-    }
-
-    #study_join_form textarea{
-      width: 80%;
-      display: block;
-      margin: 5px auto;
-    }
-
-    #study_join_form button{
-      width: 80%;
-      display: block;
-      margin: 5px auto;
-    }
   </style>
 </head>
 <body>
@@ -89,7 +67,7 @@
             %>
           </table>
         </div>
-        찾으시는 스터디가 없으신가요? <a href="create_study.jsp"> 스터디 생성하기</a>
+        찾으시는 스터디가 없으신가요? <a href="study_create.jsp"> 스터디 생성하기</a>
       </div>
     </section>
 

@@ -1,13 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<% 
-  study.User user = (study.User)session.getAttribute("user");
-  if (user == null) {
-    out.println("<script>alert('로그인 정보가 유효하지 않습니다.')</script>");
-    response.sendRedirect("signin.jsp");
-  }
-%>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,7 +60,7 @@
         </a>
       </div>
       <div id="my_study_div">
-        <a href="my_study.jsp">
+        <a href="study_list.jsp">
         스터디 관리
         </a>
       </div>

@@ -1,28 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean scope="session" id="studyGroupManager" class="study.StudyManager" />
 
-<% 
-  study.User user = (study.User)session.getAttribute("user");
-  if (user == null) {
-    out.println("<script>alert('로그인 정보가 유효하지 않습니다.')</script>");
-    response.sendRedirect("signin.jsp");
-  }
-  
-  if(request.getMethod().equals("POST")) {
-    boolean success = studyGroupManager.createStudyGroup(
-    user.getUser_id(),
-      request.getParameter("sg_name"),
-      request.getParameter("sg_description"),
-      request.getParameter("sg_max_size")
-    );
-
-    if (success) {
-      out.println("<script>alert('스터디 생성에 성공했습니다.')</script>");
-      response.sendRedirect("my_study.jsp");
-    } else {
-      out.println("<script>alert('스터디 생성에 실패했습니다.')</script>");
-    }
-  }
+<% 	
+	  study.User user = (study.User)session.getAttribute("user");
+	  
+	  if(request.getMethod().equals("POST")) {
+	    boolean success = studyGroupManager.createStudyGroup(
+	    user.getUser_id(),
+	      request.getParameter("sg_name"),
+	      request.getParameter("sg_description"),
+	      request.getParameter("sg_max_size")
+	    );
+	
+	    if (success) {
+	      out.println("<script>alert('스터디 생성에 성공했습니다.')</script>");
+	      response.sendRedirect("study_list.jsp");
+	    } else {
+	      out.println("<script>alert('스터디 생성에 실패했습니다.')</script>");
+	    }
+	  }
 %>
 
 <!DOCTYPE html>
@@ -58,28 +54,18 @@
       margin: 5px auto;
     }
 
-
-    #study_search_radio {
-      width: 80%;
-      margin: 5px auto;
-    }
   </style>
 </head>
 <body>
    <%@ include file="header.jsp" %>
   <div id="content">
+
     <section id="main_section">
-      <form id="study_create_form" method=post action="create_study.jsp">
+      <form id="study_create_form" method=post action="study_create.jsp">
         <h3>스터디 생성</h3>
         <input type="text" name="sg_name" placeholder="스터디 이름">
         <textarea name="sg_description" cols="30" rows="10" placeholder="스터디 소개글"></textarea>
-        <%-- <div id="study_search_radio">
-          스터디 종류:
-          <input id="study_type_choice1" type="radio" name="study_type" value="job">
-          <label for="study_type_choice1">진로</label>
-          <input id="study_type_choice2" type="radio" name="study_type" value="hobby">
-          <label for="study_type_choice2">취미</label>
-        </div> --%>
+       
         <input type="number" name="sg_max_size" placeholder="최대 인원수" min="1" max="20">
         <button type="submit">스터디 생성</button>
       </form>
