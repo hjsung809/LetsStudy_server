@@ -8,6 +8,24 @@
 study.User user = (study.User) session.getAttribute("user");
 study.StudyGroup studyGroup = (study.StudyGroup)session.getAttribute("studyGroup");
 int memberCount = studyGroupManager.countStudyGroupMember(studyGroup.getStudy_group_id());
+
+if(request.getMethod().equals("POST")) {
+	if(request.getParameter("_method").equals("deleteStudyGroup")) {
+		System.out.println("delete study groups");
+		boolean success = studyGroupManager.deleteStudyGroup(studyGroup.getStudy_group_id());
+		
+		if(success) {
+			response.sendRedirect("study_list.jsp");
+		}
+	} else if(request.getParameter("_method").equals("deleteThisUser")) {
+		System.out.println("delete this user study groups");
+		boolean success = studyGroupManager.deleteUserFromStudyGroup(studyGroup.getStudy_group_id(), user.getUser_id());
+		
+		if(success) {
+			response.sendRedirect("study_list.jsp");
+		}
+	}
+}
 %>
 
 <!DOCTYPE html>
@@ -43,10 +61,12 @@ int memberCount = studyGroupManager.countStudyGroupMember(studyGroup.getStudy_gr
 	margin: 5px auto;
 }
 
-#study_search_radio {
+#study_details form button {
 	width: 80%;
+	display: block;
 	margin: 5px auto;
 }
+
 </style>
 </head>
 <body>
@@ -67,25 +87,42 @@ int memberCount = studyGroupManager.countStudyGroupMember(studyGroup.getStudy_gr
 				<label for="sg_max_size">스터디 최대 가입수</label> <input type="number"
 					name="sg_max_size" placeholder="최대 인원수"
 					value="<%=studyGroup.getSg_max_size()%>" readonly>
-				
+					
+					
+				<form method="get" action="study_member_list.jsp">
+						<input type="hidden" name="study_group_id" value=<%=studyGroup.getStudy_group_id()%> >
+						<button type=submit" onclick=>스터디 구성원 목록</button>
+				</form>
 					
 				<%
 					if (studyGroup.getOwner_nickname().equals(user.getUsr_nickname())) {
 				%>
-				<button
-					onclick=<%="location.href='study_management.jsp?study_group_id=" + studyGroup.getStudy_group_id() + "'"%>>관리하기</button>
-				<button>
-					<a href="#">그룹 삭제</a>
-				</button>
+
+				<form method=get action="study_management.jsp" >
+					<input type=hidden name=study_group_id value=<%=studyGroup.getStudy_group_id()%>>
+					<button type=submit>관리하기</button>
+				</form>
+				
+				<form method=post action="study_detail.jsp" >
+					<input type=hidden name=action value=deleteStudyGroup>
+					<input type=hidden name=study_group_id value=<%=studyGroup.getStudy_group_id()%>>
+					<button type=submit>그룹 삭제</button>
+				</form>
+
 				<%
 					} else {
 				%>
-				<button>
-					<a href="#">탈퇴 하기</a>
-				</button>
+				
+				<form method=post action="study_detail.jsp" >
+					<input type=hidden name=_method value=deleteThisUser>
+					<input type=hidden name=study_group_id value=<%=studyGroup.getStudy_group_id()%>>
+					<button type=submit>탈퇴하기</button>
+				</form>
+				
 				<%
 					}
 				%>
+				<button type="button" onclick="location.href='study_list.jsp'">뒤로가기</button>
 			</div>
 		</section>
 

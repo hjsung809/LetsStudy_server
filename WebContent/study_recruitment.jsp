@@ -76,12 +76,12 @@ if (request.getMethod().equals("POST")) {
 				<p><%=studyGroup.getSg_description()%></p>
 				<br>
 				<h3>스터디 모집</h3>
-				<input type="text" name="rc_title" placeholder="제목">
+				<input type="text" name="rc_title" placeholder="모집 제목">
 				<textarea name="rc_description" cols="30" rows="10"
 					placeholder="모집 내용"></textarea>
 
-				<label for="rc_size"> 가입수</label> <input type="number"
-					name="rc_size" placeholder="모집 수"
+				<label for="rc_size">모집 인원</label> <input type="number"
+					name="rc_size"
 					max=<%=studyGroup.getSg_max_size() - memberCount%>
 					value="<%=studyGroup.getSg_max_size() - memberCount%>">
 

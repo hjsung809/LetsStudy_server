@@ -1,3 +1,4 @@
+<%@page import="study.Applicant"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -7,34 +8,23 @@
 <jsp:useBean scope="session" id="recruitmentManager"
 	class="study.RecruitmentManager" />
 
-<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
 
 
 <%
-	study.StudyGroup studyGroup = (study.StudyGroup) session.getAttribute("studyGroup");
-String recruitment_id_string = request.getParameter("recruitment_id");
-ArrayList<study.Applicant> applicants = null;
+study.User user = (study.User) session.getAttribute("user");
+study.StudyGroup studyGroup = (study.StudyGroup)session.getAttribute("studyGroup");
 
-if (recruitment_id_string == null) {
+study.Recruitment recruitment= (study.Recruitment) recruitmentManager.getRecruitment(studyGroup.getStudy_group_id());
+List<study.Applicant> applicants = null;
+
+if (recruitment == null) {
 	response.sendRedirect("study_management.jsp?study_group_id=" + studyGroup.getStudy_group_id());
-	applicants = (ArrayList<study.Applicant>) recruitmentManager.geApplicant(recruitment_id_string);
+} else {
+	applicants = (List<study.Applicant>) recruitmentManager.geApplicantList(recruitment.getRecruitment_id());
 	session.setAttribute("applicants", applicants);
 }
 
-/* if (request.getMethod().equals("POST")) {
-	boolean success = recruitmentManager.createRecruitment(
-	studyGroup.getStudy_group_id(),
-	request.getParameter("rc_title"),
-	request.getParameter("rc_description"),
-	Integer.parseInt(request.getParameter("rc_size"))
-	);
-	
-	if(success) {
-		response.sendRedirect("study_management.jsp?study_group_id=" + studyGroup.getStudy_group_id());
-	} else {
-	      out.println("<script>alert('스터디 모집 생성에 실패하였습니다.')</script>");
-	}
-} */
 %>
 
 <!DOCTYPE html>
@@ -59,7 +49,7 @@ if (recruitment_id_string == null) {
 	background-color: darksalmon;
 }
 
-#applicant_list > table {
+#applicant_list>table {
 	width: 100%;
 	padding: 5px;
 	border: 1px solid black;
@@ -76,31 +66,39 @@ if (recruitment_id_string == null) {
 	<div id="content">
 		<section id="main_section">
 			<div id="applicant_info">
-				<h3>지원자 목록</h3>
+				<h3>지원자 목록 - (<%=studyGroup.getSg_name()%>)</h3>
 				<div id="applicant_list">
+
 					<table>
-				<tr>
-					<th>지원자</th>
-					<th>전화 번호</th>
-					<th>지원 제목</th>
-					<th>자세히</th>
-				</tr>
-				<%
-					if (applicants != null) {
-					for (study.Applicant applicant : applicants) {
-				%>
-				<tr>
-					<td><%=applicant.getUser().getUsr_nickname()%></td>
-					<td><%=applicant.getUser().getUsr_phone_number()%></td>
-					<td><%=applicant.getUr_apply_title()%></td>
-					<td><a
-						href="study_applicant_detail.jsp?applicant_user_id=<%=applicant.getUser().getUser_id()%>">이동</a></td>
-				</tr>
-				<%
-					}
-				}
-				%>
-			</table>
+						<tr>
+							<th>지원자</th>
+							<th>전화 번호</th>
+							<th>지원 제목</th>
+							<th>자세히</th>
+						</tr>
+						<%
+							if (applicants != null) {
+							for (study.Applicant applicant : applicants) {
+						%>
+						<tr>
+							<td><%=applicant.getUser().getUsr_nickname()%></td>
+							<td><%=applicant.getUser().getUsr_phone_number()%></td>
+							<td><%=applicant.getUr_apply_title()%></td>
+							<td>
+							
+							<form method=get action="study_applicant_detail.jsp">
+								<input type="hidden" name="study_group_id" value=<%=studyGroup.getStudy_group_id()%>>
+								<input type="hidden" name="applicant_user_id" value=<%=applicant.getUser().getUser_id()%>>
+								<input type="hidden" name="recruitment_id" value=<%=applicant.getRecruitment_id()%>>
+								<button type="submit">이동</button>
+							</form>
+							</td>
+						</tr>
+						<%
+							}
+						}
+						%>
+					</table>
 				</div>
 			</div>
 		</section>

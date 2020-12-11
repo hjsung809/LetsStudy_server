@@ -1,25 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<header id="main_header">
-    <div id="title">
-      <h1>Let's Study</h1>
-      <h2>Main Page</h2>
-    </div>
-    <nav id="main_gnb">
-      <ul>
-        <li><a href="study_main.jsp">메인 화면</a></li>
-        <li><a href="study_search.jsp">검색 화면</a></li>
-      </ul>
-    </nav>
-    <nav id="main_lnb">
-      <ul>
-        <li><a href="#">로컬 기능 1</a></li>
-        <li><a href="#">로컬 기능 2</a></li>
-      </ul>
-    </nav>
-    <nav id="main_user">
-      <a href="#">
-        <img src="user.png">
-        <div>${user.usr_nickname}</div>
-      </a>
-    </nav>
+
+<%
+	study.User userTmp = (study.User)session.getAttribute("user");
+%>
+
+
+<header>
+	<a href="study_main.jsp" id="main_icon"><img src="./icons/main-icon.png" alt="main-icon" /></a>
+  	<a href="study_search.jsp" id="search_icon"><img src="./icons/search-icon.png" alt="search-icon"/></a>
+  	<a href="study_list.jsp" id="list_icon"><img src="./icons/user-icon.png" alt="user-icon"/></a> 
+  	<% if (userTmp != null) { %>
+  		<%= userTmp.getUsr_nickname() %>
+  	<% } %>
 </header>

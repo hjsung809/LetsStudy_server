@@ -3,7 +3,6 @@
 <jsp:useBean scope="application" id="passport" class="study.Passport" />
 
 <%
-
   if(request.getMethod().equals("POST")) {
       study.User user = passport.signIn(request.getParameter("email"), request.getParameter("password"));
 
@@ -25,67 +24,57 @@
   <link rel="stylesheet" type="text/css" href="init.css">
   
   <style>
-    #content > #main_section {
-      width: 960px;
-      float: none;
-      margin: 0 auto;
-      height: 100%;
-      background-color: antiquewhite;
-    }
-
+  	#signin_content {
+  		width: 100%;
+  		height: calc(100% - 100px);
+  		display: flex;
+  		align-items: center;
+  		justify-content: center;
+  	}
+  	
+  	#signin_section {
+  		width: 430px;
+  		height: 500px;
+  		display: flex;
+  		align-items: center;
+  		justify-content: center;
+  		box-shadow: 4px 4px 10px 4px rgba(0,0,0,0.1);
+  	}
+  	
     #signin_form {
-      width: 360px;
-      margin: 0 auto;
-      border: 1px solid black;
-      padding: 10px;
+      width: 80%;
+      height: 50%;
+      display: flex;
+  	  align-items: center;
+  	  justify-content: space-between;
+  	  flex-direction: column;
     }
-
-    #signin_form input{
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      display: inline-block;
-      box-sizing: border-box;
-    }
-
-    #signin_form button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 14px 20px;
-      margin: 8px 0;
-      border: none;
-      cursor: pointer;
-      width: 100%;
-    }
-
-    button:hover {
-      opacity: 0.8;
+    
+    #signin_go_signup a {
+      padding-left: 10px;
     }
   </style>
 </head>
 <body>
-  <div id="content">
-
-    <section id="main_section">
+  <%@ include file="header.jsp" %>
+  <div id="signin_content">
+    <section id="signin_section">
       <form id="signin_form" method=post action="signin.jsp">
-        <div>
-
-        </div>
-        <div>
-          <label for="email">E-Mail</label> 
+        <div id="input_wrapper">
+          <label for="email">이메일</label> 
           <input type="email" name="email">
-          <label for="password">Password</label>
-          <input type="password" name="password">
-          <button type="submit">로그인</button>
         </div>
-        아직 가입하지 않으셨다면? <a href="signup.jsp">회원 가입하기</a>
+        <div id="input_wrapper">
+          <label for="password">비밀번호</label>
+          <input type="password" name="password">
+        </div>
+        <div id="signin_go_signup">
+        아직 가입하지 않으셨다면? <a href="signup.jsp">회원가입하기</a>
+        </div>
+        <button type="submit">로그인</button>
       </form>
     </section>
-
   </div>
-  <footer id="main_footer">
-    <h3>Let's study</h3>
-  </footer>
+  <%@ include file="footer.jsp" %>
 </body>
 </html>

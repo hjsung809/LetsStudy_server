@@ -75,7 +75,7 @@ ArrayList<study.User> members = studyGroupManager.getStudyMember(studyGroup.getS
 					<th>닉네임</th>
 					<th>전화 번호</th>
 					<th>이메일</th>
-					<th>자세히</th>
+					<!-- <th>자세히</th> -->
 				</tr>
 				<%
 					if (members != null) {
@@ -85,8 +85,6 @@ ArrayList<study.User> members = studyGroupManager.getStudyMember(studyGroup.getS
 					<td><%=member.getUsr_nickname()%></td>
 					<td><%=member.getUsr_phone_number()%></td>
 					<td><%=member.getUsr_email()%></td>
-					<td><a
-						href="">이동</a></td>
 				</tr>
 				<%
 					}

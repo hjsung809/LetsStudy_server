@@ -68,6 +68,7 @@
        
         <input type="number" name="sg_max_size" placeholder="최대 인원수" min="1" max="20">
         <button type="submit">스터디 생성</button>
+        <button type="button" onclick="location.href='study_list.jsp'">취 소</button>
       </form>
     </section>
 

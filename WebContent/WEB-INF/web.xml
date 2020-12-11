@@ -13,7 +13,6 @@
 </filter-mapping>
 
 
-
 <filter>
 	<filter-name>signIn</filter-name>
 	<filter-class>study.SignInFilter</filter-class>
@@ -29,6 +28,7 @@
 	<url-pattern>/study_management.jsp</url-pattern>
 	<url-pattern>/study_recruitment.jsp</url-pattern>
 	<url-pattern>/study_search.jsp</url-pattern>
+	<url-pattern>/study_search_detail.jsp</url-pattern>
 	<url-pattern>/study_applicant_list.jsp</url-pattern>
 	<url-pattern>/study_applicant_detail.jsp</url-pattern>
 	<url-pattern>/study_member_list.jsp</url-pattern>
