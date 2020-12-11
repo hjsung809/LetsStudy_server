@@ -51,15 +51,18 @@
         <h3>가입된 스터디</h3>
         <div id="my_study_list">
           <table>
-            <tr><th>이 름</th><th>관리자</th><th>최대 크기</th><th>미팅 횟수</th><th>자세히</th></tr>
+            <tr><th>스터디 이름</th><th>스터디 관리자</th><th>현재 멤버 수</th><th>최대 멤버 수</th><th>생성일</th><th>자세히</th></tr>
             <%
               for(study.StudyGroup studyGroup : studyGroupList) {
+            	  int memberCount = studyGroupManager.countStudyGroupMember(studyGroup.getStudy_group_id());
             %>
               <tr>
                 <td><%=studyGroup.getSg_name()%></td>
                 <td><%=studyGroup.getOwner_nickname()%></td>
+                <td><%=memberCount%></td>
                 <td><%=studyGroup.getSg_max_size()%></td>
-                <td><%=studyGroup.getSg_meeting_count()%></td>
+                <td><%=studyGroup.getCreated_at()%></td>
+                <%-- <td><%=studyGroup.getSg_meeting_count()%></td> --%>
                 <td><a href="study_detail.jsp?study_group_id=<%=studyGroup.getStudy_group_id()%>">이동</a></td>
               </tr>
             <%

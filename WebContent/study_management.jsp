@@ -152,7 +152,7 @@ if(request.getMethod().equals("POST")) {
 			<div id="study_modify_form">
 				<form method="post"
 					action="<%="study_management.jsp?action=modify&study_group_id=" + studyGroup.getStudy_group_id()%>">
-					<h3>스터디 정보</h3>
+					<h3>스터디 정보 수정</h3>
 					<label for="sg_name">스터디 이름</label> <input type="text"
 						name="sg_name" value="<%=studyGroup.getSg_name()%>"> <label
 						for="sg_description">스터디 소개글</label>
@@ -162,7 +162,8 @@ if(request.getMethod().equals("POST")) {
 						value="<%=studyGroup.getSg_max_size()%>">
 					<button type="submit">수정 하기</button>
 				</form>
-				<label for="sg_current_size">현재 가입 인원</label> <input
+				<h3>현재 가입 인원</h3>
+				<input
 						name="sg_current_size" placeholder="현재 인원수"
 						value="<%=memberCount%>" readonly>
 				<form method="get" action="study_member_list.jsp">
@@ -177,6 +178,7 @@ if(request.getMethod().equals("POST")) {
 					<%-- <button
 					onclick=<%="location.href='study_recruitment.jsp?study_group_id=" + studyGroup.getStudy_group_id() + "'"%>>모집 하기</button> --%>
 					<form method="get" action="study_recruitment.jsp">
+						<h3>스터디 모집 광고</h3>
 						<input type="hidden" name="study_group_id" value=<%=studyGroup.getStudy_group_id()%> >
 						<button type=submit" onclick=>모집 하기</button>
 					</form>

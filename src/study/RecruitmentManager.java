@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RecruitmentManager {
-	public static final int QUERY_BY_RC_TITLE = 1;
-	public static final int QUERY_BY_RC_DESCRIPTION = 2;
+	public static final int QUERY_BY_SG_NAME = 1;
+	public static final int QUERY_BY_RC_TITLE = 2;
 	
 	
 	Connection conn = null;
@@ -150,16 +150,17 @@ public class RecruitmentManager {
 		return true;
 	}
 	
-	public ArrayList<Recruitment> getRecentRecruitment() {
+	public ArrayList<Recruitment> getRecentRecruitment(int user_id) {
 		connect();
 		ArrayList<Recruitment> recruitments = new ArrayList<>();
 
 		// 최근 10
-		String sql = "SELECT recruitments.*, study_groups.sg_name, study_groups.sg_description FROM recruitments, study_groups  WHERE recruitments.study_group_id = study_groups.study_group_id ORDER BY recruitments.created_at LIMIT 10";
+		String sql = "SELECT recruitments.*, study_groups.sg_name, study_groups.sg_description FROM recruitments, study_groups  WHERE recruitments.study_group_id = study_groups.study_group_id && study_groups.owner_id != ? ORDER BY recruitments.created_at LIMIT 10";
 		
 
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, user_id);
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -196,15 +197,19 @@ public class RecruitmentManager {
 		// 이름 기
 		String sql;
 		
-		if (queryType == QUERY_BY_RC_TITLE) {
-			sql = "SELECT recruitments.*, study_groups.sg_name, study_groups.sg_description FROM recruitments, study_groups  WHERE recruitments.rc_title LIKE '%?%' && recruitments.study_group_id = study_groups.study_group_id ORDER BY recruitments.created_at";
+		if (queryType == QUERY_BY_SG_NAME) {
+			sql = "SELECT recruitments.*, study_groups.sg_name, study_groups.sg_description FROM recruitments, study_groups  WHERE study_groups.sg_name LIKE ? && recruitments.study_group_id = study_groups.study_group_id ORDER BY recruitments.created_at";
 		} else {
-			sql = "SELECT recruitments.*, study_groups.sg_name, study_groups.sg_description FROM recruitments, study_groups  WHERE recruitments.rc_description LIKE '%?%' &&  recruitments.study_group_id = study_groups.study_group_id ORDER BY recruitments.created_at";
+			sql = "SELECT recruitments.*, study_groups.sg_name, study_groups.sg_description FROM recruitments, study_groups  WHERE recruitments.rc_title LIKE ? &&  recruitments.study_group_id = study_groups.study_group_id ORDER BY recruitments.created_at";
 		}
 
 		try {
 			// 첫번째 쿼리
 			pstmt = conn.prepareStatement(sql);
+//			System.out.println(query);
+			query = query.trim();
+			query = '%' + query + '%';
+			pstmt.setString(1, query);
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -257,6 +262,32 @@ public class RecruitmentManager {
 		return true;
 	}
 	
+	public boolean acceptApplicant(int user_id, int study_group_id, int recruitment_id) {
+		connect();
+		
+		String sql = "INSERT INTO user_study_group(user_id, study_group_id, usg_attendance_count) values(?,?,0)";
+		String sql2 = "delete from user_recruitment where user_id = ? && recruitment_id = ?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, user_id);
+			pstmt.setInt(2, study_group_id);
+			pstmt.executeUpdate();
+			
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setInt(1, user_id);
+			pstmt.setInt(2, recruitment_id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			disconnect();
+		}
+		return true;
+	}
+	
 	public boolean deleteApplicant(int user_id, int recruitment_id) {
 		connect();
 
@@ -279,17 +310,17 @@ public class RecruitmentManager {
 	
 	
 	//새 클래스 만들기.지원자 클래스.
-	public ArrayList<Applicant> geApplicant(String recruitment_id) {
+	public ArrayList<Applicant> geApplicantList(int recruitment_id) {
 		connect();
 		ArrayList<Applicant> applicants = new ArrayList<>();
 
 		// 최근 10
-		String sql = "SELECT user_recruitment.ur_apply_title, user_recruitment.ur_apply_description, users.* FROM user_recruitment, users WHERE user_recruitment.recruitment_id = ? && user_recruitment.user_id = users.user_id";
+		String sql = "SELECT user_recruitment.recruitment_id, user_recruitment.ur_apply_title, user_recruitment.ur_apply_description, users.* FROM user_recruitment, users WHERE user_recruitment.recruitment_id = ? && user_recruitment.user_id = users.user_id";
 		
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, recruitment_id);
+			pstmt.setInt(1, recruitment_id);
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -304,6 +335,7 @@ public class RecruitmentManager {
 				user.setCreated_at(rs.getTimestamp("created_at"));
 				applicant.setUser(user);
 				
+				applicant.setRecruitment_id(rs.getInt("recruitment_id"));
 				applicant.setUr_apply_title(rs.getString("ur_apply_title"));
 				applicant.setUr_apply_description(rs.getString("ur_apply_description"));
 				applicants.add(applicant);

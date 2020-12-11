@@ -88,6 +88,44 @@ public class StudyManager {
 		return true;
 	}
 	
+	public boolean deleteStudyGroup(int study_group_id) {
+		connect();
+
+		String sql = "delete from study_groups WHERE study_group_id = ?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, study_group_id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			disconnect();
+		}
+		return true;
+	}
+	
+
+	public boolean deleteUserFromStudyGroup(int study_group_id, int user_id) {
+		connect();
+
+		String sql = "delete from user_study_group WHERE study_group_id = ? && user_id = ?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, study_group_id);
+			pstmt.setInt(2, user_id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			disconnect();
+		}
+		return true;
+	}
+	
 	public boolean updateStudyGroup(String study_group_id, String sg_name, String sg_description, String sg_max_size) {
 		connect();
 
@@ -169,9 +207,9 @@ public class StudyManager {
 		connect();
 		ArrayList<StudyGroup> studyGroups = new ArrayList<>();
 		// 본인이 오너인 그룹
-		String sql = "SELECT study_groups.study_group_id, usr_nickname, sg_name, sg_description, sg_max_size, sg_meeting_count, study_groups.created_at FROM study_groups, users  WHERE study_groups.owner_id = ? && users.user_id = study_groups.owner_id";
+//		String sql = "SELECT study_groups.study_group_id, usr_nickname, sg_name, sg_description, sg_max_size, sg_meeting_count, study_groups.created_at FROM study_groups, users  WHERE study_groups.owner_id = ? && users.user_id = study_groups.owner_id";
 		// 본인이 속한 그룹
-//		String sql2 = "SELECT study_groups.study_group_id, usr_nickname, sg_name, sg_description, sg_max_size, sg_meeting_count, study_groups.created_at FROM user_study_group, study_groups, users  WHERE  user_study_group.user_id = ? && study_groups.study_group_id = user_study_group.study_group_id && users.user_id = study_groups.owner_id";
+		String sql = "SELECT study_groups.study_group_id, usr_nickname, sg_name, sg_description, sg_max_size, sg_meeting_count, study_groups.created_at FROM user_study_group, study_groups, users  WHERE  user_study_group.user_id = ? && study_groups.study_group_id = user_study_group.study_group_id && users.user_id = study_groups.owner_id";
 
 		try {
 			// 첫번째 쿼리
