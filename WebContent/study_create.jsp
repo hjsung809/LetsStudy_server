@@ -30,29 +30,39 @@
   <link rel="stylesheet" type="text/css" href="init.css">
 
   <style>
+    #main_section {
+		height: 100%;
+		display: flex;
+  		align-items: center;
+  		justify-content: center;
+	}
+	
     #study_create_form {
-      border: 1px solid black;
-      padding: 10px;
-      margin: 10px;
+      width: 800px;
+      height: 400px;
+      box-shadow: 4px 4px 10px 4px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      padding: 30px 20px;
     }
-
-    #study_create_form > input{
-      width: 80%;
-      display: block;
-      margin: 5px auto;
-    }
-
-    #study_create_form > textarea{
-      width: 80%;
-      display: block;
-      margin: 5px auto;
-    }
-
-    #study_create_form > button{
-      width: 80%;
-      display: block;
-      margin: 5px auto;
-    }
+    
+    #study_create_form > * + * {
+      margin-top: 20px;
+    } 
+    
+    #buttons {
+		display: flex;
+		justify-content: center;
+		flex-direction: row;
+	}
+	
+	#buttons button {
+		width: 200px;
+	}
+	
+	#buttons button:nth-child(2) {
+		margin-left: 50px;
+	}
 
   </style>
 </head>
@@ -67,14 +77,14 @@
         <textarea name="sg_description" cols="30" rows="10" placeholder="스터디 소개글"></textarea>
        
         <input type="number" name="sg_max_size" placeholder="최대 인원수" min="1" max="20">
+        <div id="buttons">
         <button type="submit">스터디 생성</button>
         <button type="button" onclick="location.href='study_list.jsp'">취 소</button>
+        </div>
       </form>
     </section>
 
   </div>
-  <footer id="main_footer">
-    <h3>Let's study</h3>
-  </footer>
+  <%@ include file="footer.jsp" %>
 </body>
 </html>

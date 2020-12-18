@@ -61,41 +61,50 @@
   <link rel="stylesheet" type="text/css" href="init.css">
   
   <style>
+  	#study_search_form h2{
+  	  margin: 10px 0;
+  	}
+  	
+  	#study_search_word_input {
+  	  display: flex;
+  	  align-items: center;
+  	  justify-content: center;
+  	  margin:10px 0;
+  	}
+  	
     #study_search_word_input input{
-      width: calc(95% - 50px);
-      padding: 6px 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      display: inline-block;
-      box-sizing: border-box;
+    	display: flex;
+    	flex: 1;
     }
     #study_search_word_input button{
-      width: 50px;
-      padding: 6px 10px;
-      margin: 8px auto;
-      border: 1px solid #ccc;
-      display: inline-block;
-      box-sizing: border-box;
+      width: 100px;
+      margin-left: 10px;
     }
 
 
     #study_list {
-      border: 1px solid black;
-      width: 100%;
-      height: 500px;
-      background-color: darksalmon;
+      width: calc(100%-40px);
+      height: 460px;
+      overflow: auto;
+  	  box-shadow: 4px 4px 10px 4px rgba(0,0,0,0.1);
+  	  margin-top: 10px;
+  	  padding: 20px;
     }
 
-    #study_list > table {
+    #study_list table {
       width: 100%;
-      padding: 5px;
-      border: 1px solid black;
       text-align: center;
+      border-collapse: collapse;
+    }
+    
+    #study_list tr {
+      height: 50px;
+    }
+   
+    #study_list tr:nth-child(even) {
+      background-color: rgba(0,0,0,0.05);
     }
 
-    #study_list td {
-      border: 1px solid black;
-    }
   </style>
 </head>
 <body>
@@ -103,7 +112,7 @@
   <div id="content">
     <section id="main_section">
       <form id="study_search_form" method=post>
-      	<h3>스터디 검색</h3>
+      	<h2>스터디 검색</h2>
         <div id="study_search_word_input">
           <input type="text" name="searchString">
           <button type="submit">검색</button>
@@ -149,8 +158,6 @@
       </div>
     </section>
   </div>
-  <footer id="main_footer">
-    <h3>Let's study</h3>
-  </footer>
+  <%@ include file="footer.jsp" %>
 </body>
 </html>

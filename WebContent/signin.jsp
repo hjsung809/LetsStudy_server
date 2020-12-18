@@ -24,14 +24,6 @@
   <link rel="stylesheet" type="text/css" href="init.css">
   
   <style>
-  	#signin_content {
-  		width: 100%;
-  		height: calc(100% - 100px);
-  		display: flex;
-  		align-items: center;
-  		justify-content: center;
-  	}
-  	
   	#signin_section {
   		width: 430px;
   		height: 500px;
@@ -57,14 +49,14 @@
 </head>
 <body>
   <%@ include file="header.jsp" %>
-  <div id="signin_content">
+  <div id="content">
     <section id="signin_section">
       <form id="signin_form" method=post action="signin.jsp">
-        <div id="input_wrapper">
+        <div class="input_wrapper">
           <label for="email">이메일</label> 
           <input type="email" name="email">
         </div>
-        <div id="input_wrapper">
+        <div class="input_wrapper">
           <label for="password">비밀번호</label>
           <input type="password" name="password">
         </div>

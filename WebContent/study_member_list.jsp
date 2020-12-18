@@ -38,29 +38,32 @@ ArrayList<study.User> members = studyGroupManager.getStudyMember(studyGroup.getS
 <link rel="stylesheet" type="text/css" href="init.css">
 
 <style type="text/css">
-#study_member_info {
-	border: 1px solid black;
-	padding: 10px;
-	margin: 10px;
-}
+	#study_member_info {
+      padding: 20px;
+    }
 
-#study_member_list {
-	border: 1px solid black;
-	width: 100%;
-	height: 500px;
-	background-color: darksalmon;
-}
-
-#study_member_list > table {
-	width: 100%;
-	padding: 5px;
-	border: 1px solid black;
-	text-align: center;
-}
-
-#study_member_list td {
-	border: 1px solid black;
-}
+    #study_member_list {
+      height: 480px;
+   	  overflow: auto;
+   	  box-shadow: 4px 4px 10px 4px rgba(0,0,0,0.1);
+   	  padding: 20px;
+   	  margin: 20px 0;
+    }
+    
+    #study_member_list table {
+      width: 100%;
+      text-align: center;
+      border-collapse: collapse;
+    }
+    
+    #study_member_list tr {
+      height: 50px;
+    }
+   
+    #study_member_list tr:nth-child(even) {
+      background-color: rgba(0,0,0,0.05);
+    }
+    
 </style>
 </head>
 <body>
@@ -68,7 +71,7 @@ ArrayList<study.User> members = studyGroupManager.getStudyMember(studyGroup.getS
 	<div id="content">
 		<section id="main_section">
 			<div id="study_member_info">
-				<h3>멤버 목록</h3>
+				<h2>멤버 목록</h2>
 				<div id="study_member_list">
 					<table>
 				<tr>
@@ -96,8 +99,6 @@ ArrayList<study.User> members = studyGroupManager.getStudyMember(studyGroup.getS
 		</section>
 
 	</div>
-	<footer id="main_footer">
-		<h3>Let's study</h3>
-	</footer>
+	<%@ include file="footer.jsp"%>
 </body>
 </html>
