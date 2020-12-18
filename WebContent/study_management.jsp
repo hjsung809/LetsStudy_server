@@ -64,102 +64,78 @@ if(request.getMethod().equals("POST")) {
 <link rel="stylesheet" type="text/css" href="init.css">
 
 <style type="text/css">
-#study_modify_form {
-	border: 1px solid black;
-	padding: 10px;
-	margin: 10px;
-	float: left;
-	height: 80%;
-	width: 35%;
-}
+	#main_section {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+  		align-items: center;
+  		justify-content: center;
+	}
+	#study_management {
+		display: flex;
+		flex-direction: row;
+	}	
+	
+	#study_modify_form, #study_recruitment_info {
+		width: 600px;
+		display: flex;
+		flex-direction: column;
+  		box-shadow: 4px 4px 10px 4px rgba(0,0,0,0.1);
+  		padding: 30px;
+	}
 
-#study_modify_form input {
-	width: 80%;
-	display: block;
-	margin: 5px auto;
-}
+	#study_modify_form * + *, #study_recruitment_info * + * {
+		margin-top: 10px;
+	}
+	
+	#study_modify_form + #study_recruitment_info {
+		margin-left: 20px;
+	}
+	
+	#buttons {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+  		justify-content: center;
+	}
+	
+	#buttons button{
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	
+	button {
+		margin:0 0 0 auto;
+		align-self: flex-end;
+		width: 200px;
+	}
 
-#study_modify_form textarea {
-	width: 80%;
-	display: block;
-	margin: 5px auto;
-}
 
-#study_modify_form button {
-	width: 80%;
-	display: block;
-	margin: 5px auto;
-}
-
-#study_search_radio {
-	width: 80%;
-	margin: 5px auto;
-}
-
-#study_recruitment_info {
-	float: right;
-	border: 1px solid black;
-	padding: 10px;
-	margin: 10px;
-	height: 80%;
-	width: 50%;
-}
-
-.recruitment_form {
-	width: 100%;
-}
-
-.recruitment_form  button{
-	width: 80%;
-	display: block;
-	margin: 5px auto;
-}
-
-#study_recruitment_info input {
-	width: 80%;
-	display: block;
-	margin: 5px auto;
-}
-
-#study_recruitment_info textarea {
-	width: 80%;
-	display: block;
-	margin: 5px auto;
-}
-
-#study_recruitment_form button {
-	width: 80%;
-	display: block;
-	margin: 5px auto;
-}
-
-/* #study_applicant_list>table {
-	width: 100%;
-	padding: 5px;
-	border: 1px solid black;
-	text-align: center;
-}
-
-#study_applicant_list td {
-	border: 1px solid black;
-} */
 </style>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
 	<div id="content">
 		<section id="main_section">
+			<div id="study_management">
 			<div id="study_modify_form">
 				<form method="post"
 					action="<%="study_management.jsp?action=modify&study_group_id=" + studyGroup.getStudy_group_id()%>">
 					<h3>스터디 정보 수정</h3>
+					<div class="input_wrapper">
 					<label for="sg_name">스터디 이름</label> <input type="text"
-						name="sg_name" value="<%=studyGroup.getSg_name()%>"> <label
+						name="sg_name" value="<%=studyGroup.getSg_name()%>"> 
+						</div>
+						<div class="input_wrapper">
+						<label
 						for="sg_description">스터디 소개글</label>
 					<textarea name="sg_description" cols="30" rows="10"><%=studyGroup.getSg_description()%></textarea>
+					</div>
+					<div class="input_wrapper">
 					<label for="sg_max_size">스터디 최대 가입수</label> <input type="number"
 						name="sg_max_size" placeholder="최대 인원수"
 						value="<%=studyGroup.getSg_max_size()%>">
+					</div>
 					<button type="submit">수정 하기</button>
 				</form>
 				<h3>현재 가입 인원</h3>
@@ -192,21 +168,25 @@ if(request.getMethod().equals("POST")) {
 				%>
 				<p>현재 스터디를 모집하고 있지 않습니다.</p>
 				<%} else { %>
-					
+					<div class="input_wrapper">
 					<label for="rc_title">모집 제목</label>
 					<input type="text" name="rc_title" value=<%=recruitment.getRc_title()%> readonly>
+					</div>
+					<div class="input_wrapper">
 					<label for="rc_description">모집 내용</label>
 					<textarea name="rc_description" cols="30" rows="10" readonly><%=recruitment.getRc_description()%></textarea>
-	
+					</div>
+					<div class="input_wrapper">
 					<label for="rc_size"> 모집 수</label> <input type="number"
 						name="rc_size" placeholder="모집 수" readonly
 						value="<%=recruitment.getRc_size()%>">
-						
-					
+					</div>
+					<div class="input_wrapper">
 					<label for="applicant_size"> 지원자 수</label> <input type="number"
 						name="applicant_size" placeholder="모집 수" readonly
 						value="<%=applicant_count%>">
-						
+					</div>
+					<div id="buttons">
 					<form class="recruitment_form" method="get"
 						action="study_applicant_list.jsp">
 						<input type="hidden" name="study_group_id" value=<%=studyGroup.getStudy_group_id()%> >
@@ -218,13 +198,13 @@ if(request.getMethod().equals("POST")) {
 						action="<%="study_management.jsp?action=deleteRecruitment&study_group_id=" + studyGroup.getStudy_group_id()%>">
 						<button type=submit" onclick=>모집 취소</button>
 					</form>
+					</div>
 				<% } %>
+			</div>
 			</div>
 		</section>
 
 	</div>
-	<footer id="main_footer">
-		<h3>Let's study</h3>
-	</footer>
+	<%@ include file="footer.jsp"%>
 </body>
 </html>

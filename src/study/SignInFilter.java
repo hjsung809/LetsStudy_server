@@ -36,18 +36,7 @@ public class SignInFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
-//		HttpSession session =((HttpServletRequest)request).getSession();
-//		User user = (User)session.getAttribute("user");
-//		if (user == null) {
-//			((HttpServletResponse)response).sendRedirect("signin.jsp");	
-//		} else {
-//			chain.doFilter(request, response);
-//		}
-		
-		
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {		
 		if(request instanceof HttpServletRequest) {
 			HttpSession session =((HttpServletRequest)request).getSession();
 			User user = (User)session.getAttribute("user");
@@ -58,8 +47,6 @@ public class SignInFilter implements Filter {
 				}
 			}
 		}
-
-		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}
 

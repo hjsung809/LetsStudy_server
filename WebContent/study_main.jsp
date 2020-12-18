@@ -16,14 +16,6 @@
   <title>Document</title>
   <link rel="stylesheet" type="text/css" href="init.css">
   <style>
-  	#main_content {
-  	  width: 100%;
-  	  height: calc(100% - 100px);
-  	  display: flex;
-  	  align-items: center;
-  	  justify-content: center;
-  	}
-  	
   	#main_section {
   	  width: 600px;
   	  height: 250px;
@@ -70,7 +62,7 @@
 </head>
 <body>
   <%@ include file="header.jsp" %>
-  <div id="main_content">
+  <div id="content">
   	<section id="main_section">
     <p id="main_title">LET'S STUDY!</p>
     <p id="main_des">자유롭게 스터디를 만들고 참여할 수 있는 공간이에요. 다양한 스터디를 만나고 참여해보세요!</p>

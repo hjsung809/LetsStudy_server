@@ -36,29 +36,32 @@ if (recruitment == null) {
 <link rel="stylesheet" type="text/css" href="init.css">
 
 <style type="text/css">
-#applicant_info {
-	border: 1px solid black;
-	padding: 10px;
-	margin: 10px;
-}
+    #applicant_info {
+      padding: 20px;
+    }
 
-#applicant_list {
-	border: 1px solid black;
-	width: 100%;
-	height: 500px;
-	background-color: darksalmon;
-}
-
-#applicant_list>table {
-	width: 100%;
-	padding: 5px;
-	border: 1px solid black;
-	text-align: center;
-}
-
-#applicant_list td {
-	border: 1px solid black;
-}
+    #applicant_list {
+      height: 480px;
+   	  overflow: auto;
+   	  box-shadow: 4px 4px 10px 4px rgba(0,0,0,0.1);
+   	  padding: 20px;
+   	  margin: 20px 0;
+    }
+    
+    #applicant_list table {
+      width: 100%;
+      text-align: center;
+      border-collapse: collapse;
+    }
+    
+    #applicant_list tr {
+      height: 50px;
+    }
+   
+    #applicant_list tr:nth-child(even) {
+      background-color: rgba(0,0,0,0.05);
+    }
+    
 </style>
 </head>
 <body>
@@ -104,8 +107,6 @@ if (recruitment == null) {
 		</section>
 
 	</div>
-	<footer id="main_footer">
-		<h3>Let's study</h3>
-	</footer>
+	<%@ include file="footer.jsp"%>
 </body>
 </html>

@@ -32,15 +32,7 @@ response.sendRedirect("signin.jsp");
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" type="text/css" href="init.css">
-  <style>
-  	#signup_content {
-  		width: 100%;
-  		height: calc(100% - 100px);
-  		display: flex;
-  		align-items: center;
-  		justify-content: center;
-  	}
-  	
+  <style>  	
   	#signup_section {
   		width: 480px;
   		height: 600px;
@@ -74,34 +66,34 @@ response.sendRedirect("signin.jsp");
 </head>
 <body>
   <%@ include file="header.jsp" %>
-  <div id="signup_content">
+  <div id="content">
     <section id="signup_section">
       <form id="signup_form" method=post action="signup.jsp">
-          <div id="input_wrapper">
+          <div class="input_wrapper">
            <label for="email">이메일</label>
            <input type="email" name="email">
           </div>
-         <div id="input_wrapper">
+         <div class="input_wrapper">
             <label for="nickname">닉네임</label>
             <input type="text" name="nickname">
           </div>
-          <div id="input_wrapper">
+          <div class="input_wrapper">
            <label for="password">비밀번호</label>
            <input type="password" name="password">
           </div>
-          <div id="input_wrapper">
+          <div class="input_wrapper">
            <label for="password2">비밀번호 확인</label>
            <input type="password" name="password2">
           </div>
-         <div id="input_wrapper">
+         <div class="input_wrapper">
            <label for="phone_number">휴대전화</label>
            <input type="tel" name="phone_number">
           </div>
-          <div id="input_wrapper">
+          <div class="input_wrapper">
            <label for="description">자기 소개</label>
            <textarea name="description"></textarea>
           </div>
-          <div id="signup_go_signin">
+          <div class="signup_go_signin">
             이미 회원이신가요? <a href="signin.jsp">로그인</a>
           </div>
           <button type="submit">회원가입</button>

@@ -39,29 +39,27 @@ if (request.getMethod().equals("POST")) {
 <link rel="stylesheet" type="text/css" href="init.css">
 
 <style type="text/css">
-#study_recruitment_form {
-	border: 1px solid black;
-	padding: 10px;
-	margin: 10px;
-}
+	#main_section {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+  		justify-content: center;
+	}
+	
+	#study_recruitment_form {
+		width: 95%;
+		height: 70%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+  		box-shadow: 4px 4px 10px 4px rgba(0,0,0,0.1);
+  		padding: 30px;
+	}
+	
+	#study_recruitment_form button {
+		width: 200px;
+	}
 
-#study_recruitment_form>input {
-	width: 80%;
-	display: block;
-	margin: 5px auto;
-}
-
-#study_recruitment_form>textarea {
-	width: 80%;
-	display: block;
-	margin: 5px auto;
-}
-
-#study_recruitment_form>button {
-	width: 80%;
-	display: block;
-	margin: 5px auto;
-}
 </style>
 </head>
 <body>
@@ -90,8 +88,6 @@ if (request.getMethod().equals("POST")) {
 		</section>
 
 	</div>
-	<footer id="main_footer">
-		<h3>Let's study</h3>
-	</footer>
+	<%@ include file="footer.jsp"%>
 </body>
 </html>

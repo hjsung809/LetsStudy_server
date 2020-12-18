@@ -37,35 +37,28 @@ if(request.getMethod().equals("POST")) {
 <link rel="stylesheet" type="text/css" href="init.css">
 
 <style>
-#study_details {
-	border: 1px solid black;
-	padding: 10px;
-	margin: 10px;
-}
-
-#study_details>input {
-	width: 80%;
-	display: block;
-	margin: 5px auto;
-}
-
-#study_details>textarea {
-	width: 80%;
-	display: block;
-	margin: 5px auto;
-}
-
-#study_details>button {
-	width: 80%;
-	display: block;
-	margin: 5px auto;
-}
-
-#study_details form button {
-	width: 80%;
-	display: block;
-	margin: 5px auto;
-}
+    #study_details {
+      margin-top: 40px;
+      box-shadow: 4px 4px 10px 4px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    
+    #study_details > * + * {
+      margin-top: 20px;
+    } 
+    
+    #buttons {
+		display: flex;
+		justify-content: center;
+		flex-direction: row;
+	}
+	
+	#buttons button {
+		width: 200px;
+		margin: 0 10px;
+	}
 
 </style>
 </head>
@@ -74,21 +67,26 @@ if(request.getMethod().equals("POST")) {
 	<div id="content">
 		<section id="main_section">
 			<div id="study_details" method=post action="study_create.jsp">
-				<h3>스터디 정보</h3>
+				<h2>스터디 정보</h2>
+				<div class="input_wrapper">
 				<label for="sg_name">스터디 이름</label> <input type="text"
 					name="sg_name" readonly value="<%=studyGroup.getSg_name()%>">
+				</div>
+				<div class="input_wrapper">
 				<label for="sg_description">스터디 소개글</label>
 				<textarea name="sg_description" cols="30" rows="10" readonly><%=studyGroup.getSg_description()%></textarea>
-				
+				</div>
+				<div class="input_wrapper">
 				<label for="sg_current_size">스터디 현재 가입수</label> <input type="number"
 					name="sg_current_size"
 					value="<%=memberCount%>" readonly>
-					
+				</div>
+				<div class="input_wrapper">
 				<label for="sg_max_size">스터디 최대 가입수</label> <input type="number"
 					name="sg_max_size" placeholder="최대 인원수"
 					value="<%=studyGroup.getSg_max_size()%>" readonly>
-					
-					
+				</div>
+				<div id="buttons">
 				<form method="get" action="study_member_list.jsp">
 						<input type="hidden" name="study_group_id" value=<%=studyGroup.getStudy_group_id()%> >
 						<button type=submit" onclick=>스터디 구성원 목록</button>
@@ -123,12 +121,10 @@ if(request.getMethod().equals("POST")) {
 					}
 				%>
 				<button type="button" onclick="location.href='study_list.jsp'">뒤로가기</button>
+				</div>
 			</div>
 		</section>
-
+		<%@ include file="footer.jsp"%>
 	</div>
-	<footer id="main_footer">
-		<h3>Let's study</h3>
-	</footer>
 </body>
 </html>

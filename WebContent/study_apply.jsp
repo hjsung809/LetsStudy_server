@@ -67,38 +67,46 @@ if (recruitments != null && recruitment_id_string != null) {
 <link rel="stylesheet" type="text/css" href="init.css">
 
 <style>
-.study_apply {
-	border: 1px solid black;
-	padding: 10px;
-	margin: 10px;
-}
 
-.study_apply form {
-	width: 80%;
-	margin: 5px auto;
-}
-
-.study_apply form input {
-	width: 80%;
-	display: block;
-	margin: 5px auto;
-}
-
-.study_apply form textarea {
-	width: 80%;
-	display: block;
-	margin: 5px auto;
-}
-
-.study_apply form button {
-	width: 80%;
-	display: block;
-	margin: 5px auto;
-}
-
-button {
-	margin: 5px;
-}
+	#main_section {
+		height: 100%;
+		display: flex;
+  		align-items: center;
+  		justify-content: center;
+	}
+	
+   .study_apply {
+      width: 800px;
+      height: 400px;
+      box-shadow: 4px 4px 10px 4px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      padding: 30px 20px;
+    }
+    .study_apply form {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .study_apply form textarea {
+      height: 150px;
+    }
+    
+     .study_apply form > * + * {
+      margin-top: 10px;
+      margin-bottom: 10px;
+     }
+    
+    .study_apply > * + * {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    } 
+    
+    button {
+   	  width: 200px;
+   	  align-self: center;
+    }
+    
 </style>
 </head>
 <body>
@@ -131,8 +139,6 @@ button {
 		</section>
 
 	</div>
-	<footer id="main_footer">
-		<h3>Let's study</h3>
-	</footer>
+	<%@ include file="footer.jsp"%>
 </body>
 </html>
